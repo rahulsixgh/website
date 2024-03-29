@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Subscriber Count</title>
+</head>
+<body>
+    <h1>YouTube Subscriber Count</h1>
+    <p id="subscriberCount">Loading...</p>
+
+    <script>
+        const channelId = 'UCFhX_QymcLcjO7PW4J12DIQ';
+        const apiKey = 'AIzaSyCMzT1MLAxva-Izkr4PBTyJpA7KAwiK2NU';
+
+        fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`)
+            .then(response => response.json())
+            .then(data => {
+                const subscriberCount = data.items[0].statistics.subscriberCount;
+                document.getElementById('subscriberCount').textContent = `Subscribers: ${subscriberCount}`;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
